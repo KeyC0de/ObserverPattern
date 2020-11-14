@@ -1,72 +1,52 @@
+#include <iostream>
 #include "observer.h"
+#include "subject.h"
 
-	explicit IObserver( Car* subject )
-		:
-		m_pSubject{subject} 
-	{}
-	virtual ~IObserver() noexcept
-	{
-		m_pSubject->unsubscribe( this );
-	}
 
-	IObserver( const IObserver& rhs ) = delete;
-	IObserver& operator=( const IObserver& rhs ) = delete;
-	IObserver( IObserver&& rhs )
-		:
-		m_pSubject{std::move( rhs.m_pSubject )}
-	{}
-	IObserver& operator=( IObserver&& rhs ) noexcept
-	{
-		if ( this != &rhs )
-		{
-			std::swap( this->m_pSubject, rhs.m_pSubject );
-		}
-		return *this;
-	}
+IObserver::IObserver( class Car* subject )
+	:
+	m_pSubject{subject} 
+{}
 
-	virtual void update() const noexcept = 0;
-};
-
-class LeftObserver
-	: public IObserver 
+IObserver::~IObserver() noexcept
 {
-	// enum with messages of interest - subscribe to them all
-public:
-	LeftObserver( Car* subject )
-		:
-		IObserver{subject}
-	{
-		subject->subscribe( this );			// CAN ALSO SUBSCRIBE TO A MESSAGE TYPE
-	}
+	m_pSubject->unsubscribe( this );
+}
 
-	void update() const noexcept override
-	{
-		std::wcout << L"Car turned left\n";
-	}
-};
+IObserver::IObserver( IObserver&& rhs ) noexcept
+	:
+	m_pSubject{std::move( rhs.m_pSubject )}
+{}
 
-class RightObserver
-	: public IObserver 
+IObserver& IObserver::operator=( IObserver&& rhs ) noexcept
 {
-public:
-	RightObserver( Car* subject )
-		:
-		IObserver{subject}
+	if ( this != &rhs )
 	{
-		subject->subscribe( this );
+		std::swap( this->m_pSubject, rhs.m_pSubject );
 	}
+	return *this;
+}
 
-	void update() const noexcept override
-	{
-		std::wcout << L"Car turned right\n";
-	}
-};
-
-
-void Car::notify(/*MessageType*/)
+LeftObserver::LeftObserver( class Car* subject )
+	:
+	IObserver{subject}
 {
-	for ( auto* ob : m_observers )
-	{// CHOOSE OVER MESSAGE TYPES TO NOTIFY APPROPRIATE OBSERVERS
-		ob->update();
-	}
+	subject->subscribe( this );			// CAN ALSO SUBSCRIBE TO A MESSAGE TYPE
+}
+
+void LeftObserver::update() const noexcept
+{
+	std::wcout << L"Car turned left\n";
+}
+
+RightObserver::RightObserver( class Car* subject )
+	:
+	IObserver{subject}
+{
+	subject->subscribe( this );
+}
+
+void RightObserver::update() const noexcept
+{
+	std::wcout << L"Car turned right\n";
 }
