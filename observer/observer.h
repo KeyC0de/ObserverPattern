@@ -1,8 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
 #include "misc.h"
 
 
@@ -25,7 +22,7 @@ public:
 };
 
 class LeftObserver
-	: public IObserver 
+	: public IObserver
 {
 public:
 	LeftObserver( class Car* subject );
@@ -33,7 +30,7 @@ public:
 };
 
 class RightObserver
-	: public IObserver 
+	: public IObserver
 {
 public:
 	RightObserver( class Car* subject );

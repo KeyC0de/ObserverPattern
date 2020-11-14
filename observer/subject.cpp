@@ -1,6 +1,7 @@
 #include <iostream>
+#include <algorithm>
 #include "subject.h"
-#include "observer.cpp"
+#include "observer.h"
 
 
 Car::Car()
