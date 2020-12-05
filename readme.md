@@ -4,28 +4,34 @@
 <hr>
 
 
-aka Subscribe-Publish</br>
+An object, called the `Subject`, maintains a list of `Observer`s and notifies them automatically of any state changes, usually by calling one of their methods.
+
+Various nosy `Observer` (concrete) classes want to know when another object does something in which they are interested in and want to react to it in a potentially unique way.
+The curious class inherits the `IObserver` interface.
+
+The pattern promotes loose coupling since the `Subject`s don't need to know anything about the observers or listeners.
+
+Underlying the popular, ever-present in networking, "Model View Controller" (MVC) pattern, is the observer pattern.
+
+
+## Design
+
+- All observers should have a common parent `Observer` class or interface (abstract class).
+- `Observer`s subscribe to a `Subject` class upon their construction.
+	* In code: They are given (dependency injection) a pointer to the `Subject`, they pass it to the base `IObserver` class's constructor, and then they call the `Subject`'s `subscribe` method with `this`/themselves as the argument.
+- New subscribers are added to the observer's list.
+- When the subject's state, or a subset of its state that a particular observer is interested in, is changed the Subject notifies all the interested parties on this state change, by calling one of their public methods (typically called `notify`).
+- Observer objects should automatically `unsubscribe` themselves from the Subject when destroyed.
+
+
+Alternative terminology for this pattern includes the following:
+
+Subscribe-Publish</br>
 or Listener-Publisher</br>
 or Delegate-Model</br>
+or Sink-Source, where the Subject is the source of events and the Observers are sinks of events.</br>
 
-Underlying the MVC pattern is the observer pattern.
-An object, called the subject, maintains a list of observers that and notifies them automatically of any state changes, usually by calling one of their methods.
-
-Various nosy observer (concrete) classes wants to know when another object does something interesting that they care about and want to react to it in a potentially unique way.
-The curious class defined is by the IObserver interface.
-
-The pattern promotes loose coupling since the Subjects don't need to know anything about the observers/listeners.
-
-**Design**
-
-- All observers should have a common parent `Observer` class.
-- Observers subscribe to a subject class upon their construction. They are given (dependency injection) a pointer to the subject, they pass it to the base `IObserver` class's constructor, and then they call the `Subject`'s `subscribe` method with `this` as argument.
-- Upon an `Observer`'s their destruction they call `Subject::unsubscribe`.
-- New subscribers are added to the observer's list.
-- When the subject's state, or a subset of its state that the observer is interested in, is changed the Subject notifies all interested parties on this state change, by calling one of their public methods which is typically called `notify`. For this reason subjects differentiate between types of incoming events/commands.
-- Observer objects should automatically unsubscribe themselves when destroyed.
-
-I used Windows 8.1 x86_64, Visual Studio 2017, C++17 to build the project.
+I used Windows 8.1 x86_64, Visual Studio 2017, Modern C++17 to build the project. It should work on other platforms as well.
 
 
 # Contribute

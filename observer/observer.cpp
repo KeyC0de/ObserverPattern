@@ -34,7 +34,7 @@ LeftObserver::LeftObserver( class Car* subject )
 	subject->subscribe( this );			// CAN ALSO SUBSCRIBE TO A MESSAGE TYPE
 }
 
-void LeftObserver::update() const noexcept
+void LeftObserver::notify() const noexcept
 {
 	std::wcout << L"Car turned left\n";
 }
@@ -46,7 +46,7 @@ RightObserver::RightObserver( class Car* subject )
 	subject->subscribe( this );
 }
 
-void RightObserver::update() const noexcept
+void RightObserver::notify() const noexcept
 {
 	std::wcout << L"Car turned right\n";
 }

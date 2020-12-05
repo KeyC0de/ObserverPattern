@@ -60,6 +60,6 @@ void Car::notify(/*MessageType*/)
 {
 	for ( const auto* ob : m_observers )
 	{// CHOOSE OVER MESSAGE TYPES TO NOTIFY APPROPRIATE OBSERVERS
-		ob->update();
+		ob->notify();
 	}
 }
