@@ -35,22 +35,22 @@ void Car::setColor( Color color )
 
 void Car::subscribe( class IObserver* observer )
 {
-	m_observers.push_back( observer );
+	m_pObservers.push_back( observer );
 	std::wcout << "IObserver Subscribed\n";
 }
 
 void Car::unsubscribe( class IObserver* observer ) noexcept
 {
-	m_observers.erase( std::remove( m_observers.begin(),
-			m_observers.end(),
+	m_pObservers.erase( std::remove( m_pObservers.begin(),
+			m_pObservers.end(),
 			observer ),
-		m_observers.end() );
+		m_pObservers.end() );
 	std::wcout << "IObserver Unsubscribed\n";
 }
 
 void Car::unsubscribeAll() noexcept
 {
-	for ( auto* ob : m_observers )
+	for ( auto* ob : m_pObservers )
 	{
 		unsubscribe( ob );
 	}
@@ -58,7 +58,7 @@ void Car::unsubscribeAll() noexcept
 
 void Car::notify(/*MessageType*/)
 {
-	for ( const auto* ob : m_observers )
+	for ( const auto* ob : m_pObservers )
 	{// CHOOSE OVER MESSAGE TYPES TO NOTIFY APPROPRIATE OBSERVERS
 		ob->notify();
 	}

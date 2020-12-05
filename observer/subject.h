@@ -10,7 +10,7 @@ class IObserver;
 class Car final
 {
 private:
-	std::vector<class IObserver*> m_observers;
+	std::vector<class IObserver*> m_pObservers;
 	int m_position;
 	Color m_color;
 private:
