@@ -24,6 +24,13 @@ Underlying the popular, ever-present in networking, "Model View Controller" (MVC
 - Observer objects should automatically `unsubscribe` themselves from the Subject when destroyed.
 
 
+**Improvements**:</br>
+
+An update to this system, which I don't include in this code, is "Selective notification of Observers". Meaning that an Observer usually subscribes to a particular of notification it is interested in, not to any and all actions that the Subject performs (it's typically not interested in everything). The `misc.h` header file contains various enums/flags which can be used to improve upon. I'm planning to update this repo in the future with this code, but I recommend you to do it on your own to test your understanding. It's really very simple. In reference to our example, the `LeftObserver` should only be interested when the Subject - `Car` turns left and the `RightObserver` when the `Car` turns right. So the `Car` should not notify all `m_pObservers` all the time, rather only the ones that have subscribed using a particular flag (which indicates what they're interested in).
+
+Tip: for "multiple interests" the observers can pass along an OR of multiple flags to subscribe to multiple notifications.
+
+
 Alternative terminology for this pattern includes the following:
 
 Subscribe-Publish</br>
