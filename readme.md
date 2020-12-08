@@ -11,8 +11,6 @@ The curious class inherits the `IObserver` interface.
 
 The pattern promotes loose coupling since the `Subject`s don't need to know anything about the observers or listeners.
 
-Underlying the popular, ever-present in networking, "Model View Controller" (MVC) pattern, is the observer pattern.
-
 
 ## Design
 
@@ -30,6 +28,10 @@ An update to this system, which I don't include in this code, is "Selective noti
 
 Tip: for "multiple interests" the observers can pass along an OR of multiple flags to subscribe to multiple notifications.
 
+I used Windows 8.1 x86_64, Visual Studio 2017, Modern C++17 to build the project. It should work on other platforms as well.
+
+
+## Miscellaneous
 
 Alternative terminology for this pattern includes the following:
 
@@ -38,7 +40,11 @@ or Listener-Publisher</br>
 or Delegate-Model</br>
 or Sink-Source, where the Subject is the source of events and the Observers are sinks of events.</br>
 
-I used Windows 8.1 x86_64, Visual Studio 2017, Modern C++17 to build the project. It should work on other platforms as well.
+The observer is a very important design pattern which is being used in almost every single codebase as a way to efficienty communicate between objects in an event-based function. It wouldn't be an understatement to say it is the foundation of event based programming.
+
+Underlying the popular, ever-present in networking, "Model View Controller" (MVC) design pattern, is the observer pattern.
+
+Observers are used in every single game engine - they're known there mostly as "Event dispatchers". This includes Unreal Engine.
 
 
 # Contribute
