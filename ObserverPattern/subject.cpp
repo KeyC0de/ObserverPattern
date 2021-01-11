@@ -28,7 +28,7 @@ void Car::setPosition( int val )
 
 void Car::setColor( Color color )
 {
-	std::wcout << L"setting color\n";
+	std::cout << "setting color\n";
 	m_color = color;
 	//notify(/*MessageType*/);	// suppose nobody subscribed to this event
 }
@@ -36,7 +36,7 @@ void Car::setColor( Color color )
 void Car::subscribe( class IObserver* observer )
 {
 	m_pObservers.push_back( observer );
-	std::wcout << "IObserver Subscribed\n";
+	std::cout << "IObserver Subscribed\n";
 }
 
 void Car::unsubscribe( class IObserver* observer ) noexcept
@@ -45,7 +45,7 @@ void Car::unsubscribe( class IObserver* observer ) noexcept
 			m_pObservers.end(),
 			observer ),
 		m_pObservers.end() );
-	std::wcout << "IObserver Unsubscribed\n";
+	std::cout << "IObserver Unsubscribed\n";
 }
 
 void Car::unsubscribeAll() noexcept

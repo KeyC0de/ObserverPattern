@@ -13,14 +13,14 @@ static DWORD getFontFamily( HANDLE h )
 	BOOL conFont = GetCurrentConsoleFont( h,
 		false,
 		&cfi );
-	std::wcout << conFont
-		<< L"\nnFont="
+	std::cout << conFont
+		<< "\nnFont="
 		<< cfi.nFont
-		<< L"fontSize=("
+		<< "fontSize=("
 		<< cfi.dwFontSize.X
-		<< L','
+		<< ','
 		<< cfi.dwFontSize.Y
-		<< L")\n";
+		<< ")\n";
 	return conFont ? cfi.nFont
 		: -1;
 }
@@ -28,18 +28,19 @@ static DWORD getFontFamily( HANDLE h )
 void getConsoleInfo( HANDLE h )
 {
 	using GETNUMBEROFCONSOLEFONTS = DWORD (WINAPI* )();
-    using SETCONSOLEFONT = BOOL (WINAPI*)( HANDLE hConOut, DWORD nFont );
+	using SETCONSOLEFONT = BOOL (WINAPI*)( HANDLE hConOut, DWORD nFont );
 	auto GetNumberOfConsoleFonts =
 		(GETNUMBEROFCONSOLEFONTS) GetProcAddress( LoadLibraryW( L"KERNEL32" ),
 		"GetNumberOfConsoleFonts" );
-    auto SetConsoleFont = (SETCONSOLEFONT) GetProcAddress(LoadLibraryW(L"KERNEL32"),
+	auto setConsoleFont = (SETCONSOLEFONT) GetProcAddress( LoadLibraryW( L"KERNEL32" ),
 		"SetConsoleFont");
+	(void)setConsoleFont;
 	auto font = getFontFamily( h );
-	std::wcout << L"nConsoleFonts="
+	std::cout << "nConsoleFonts="
 		<< GetNumberOfConsoleFonts()
-		<< L"fontName="
+		<< "fontName="
 		<< font
-		<< L'\n';
+		<< '\n';
 }
 #	pragma endregion
 #endif
@@ -78,13 +79,7 @@ int main()
 		&cfie );
 
 	getConsoleInfo( hStdOut );
-	
 	// change file stream translation mode
-	_setmode( _fileno( stdout ), _O_U16TEXT );
-	_setmode( _fileno( stderr ), _O_U16TEXT );
-	_setmode( _fileno( stdin ), _O_U16TEXT );
-	// use w-streams for interaction with the console
-	// use regular streams for interaction with files
 #	pragma endregion
 #endif
 	std::ios_base::sync_with_stdio( false );
@@ -95,28 +90,28 @@ int main()
 	LeftObserver lo{&car};
 	RightObserver ro{&car};
 
-	std::wcout << L"Press A for left, D for right, c for color, Q to quit\n";
+	std::cout << "Press A for left, D for right, c for color, Q to quit\n";
 
 	while ( true )
 	{
-		wchar_t c;
-		std::wcin >> c;
+		char c;
+		std::cin >> c;
 		switch ( c )
 		{
-			case L'a':
-			case L'A':
+			case 'a':
+			case 'A':
 				car.setPosition( -1 );
 				break;
-			case L'c':
-			case L'C':
+			case 'c':
+			case 'C':
 				car.setColor( Color::MAGENTA );
 				break;
-			case L'd':
-			case L'D':
+			case 'd':
+			case 'D':
 				car.setPosition( 1 );
 				break;
-			case L'Q':
-			case L'q':
+			case 'Q':
+			case 'q':
 				goto _BREAK_OFF_LOOP;
 				break;
 			default:

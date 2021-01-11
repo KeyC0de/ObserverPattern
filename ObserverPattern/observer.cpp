@@ -36,7 +36,7 @@ LeftObserver::LeftObserver( class Car* subject )
 
 void LeftObserver::notify() const noexcept
 {
-	std::wcout << L"Car turned left\n";
+	std::cout << "Car turned left\n";
 }
 
 RightObserver::RightObserver( class Car* subject )
@@ -48,5 +48,5 @@ RightObserver::RightObserver( class Car* subject )
 
 void RightObserver::notify() const noexcept
 {
-	std::wcout << L"Car turned right\n";
+	std::cout << "Car turned right\n";
 }
