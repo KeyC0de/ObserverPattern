@@ -13,8 +13,6 @@ public:
 	IObserver( class Car* subject );
 	virtual ~IObserver() noexcept;
 
-	IObserver( const IObserver& rhs ) = delete;
-	IObserver& operator=( const IObserver& rhs ) = delete;
 	IObserver( IObserver&& rhs ) noexcept;
 	IObserver& operator=( IObserver&& rhs ) noexcept;
 

@@ -6,9 +6,11 @@
 
 Car::Car()
 	:
-	m_position{0},
-	m_color{Color::BLACK}
-{}
+	m_position(0),
+	m_color(Color::BLACK)
+{
+
+}
 
 Car::~Car()
 {
@@ -59,7 +61,9 @@ void Car::unsubscribeAll() noexcept
 void Car::notify(/*MessageType*/)
 {
 	for ( const auto* ob : m_pObservers )
-	{// CHOOSE OVER MESSAGE TYPES TO NOTIFY APPROPRIATE OBSERVERS
+	{
+		// SWITCH OVER MESSAGE TYPES AND NOTIFY INTERESTED OBSERVERS APPROPRIATELY
+		// ..
 		ob->notify();
 	}
 }

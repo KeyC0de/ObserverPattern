@@ -1,6 +1,9 @@
 #include <iostream>
 #include "observer.h"
 #include "subject.h"
+#if defined _DEBUG && !defined NDEBUG
+#	include <vld.h>
+#endif
 
 #if defined _WIN32 || defined _MSC_VER
 #	pragma region WIN_CONSOLE

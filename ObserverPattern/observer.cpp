@@ -6,7 +6,9 @@
 IObserver::IObserver( class Car* subject )
 	:
 	m_pSubject{subject} 
-{}
+{
+
+}
 
 IObserver::~IObserver() noexcept
 {
@@ -14,18 +16,16 @@ IObserver::~IObserver() noexcept
 }
 
 IObserver::IObserver( IObserver&& rhs ) noexcept
-	:
-	m_pSubject{std::move( rhs.m_pSubject )}
-{}
+{
+	std::swap( this->m_pSubject, rhs.m_pSubject );
+}
 
 IObserver& IObserver::operator=( IObserver&& rhs ) noexcept
 {
-	if ( this != &rhs )
-	{
-		std::swap( this->m_pSubject, rhs.m_pSubject );
-	}
+	std::swap( this->m_pSubject, rhs.m_pSubject );
 	return *this;
 }
+
 
 LeftObserver::LeftObserver( class Car* subject )
 	:
