@@ -12,7 +12,6 @@ class IObserver
 public:
 	IObserver( class Car* subject );
 	virtual ~IObserver() noexcept;
-
 	IObserver( IObserver&& rhs ) noexcept;
 	IObserver& operator=( IObserver&& rhs ) noexcept;
 
@@ -24,6 +23,7 @@ class LeftObserver
 {
 public:
 	LeftObserver( class Car* subject );
+
 	void notify() const noexcept override;
 };
 
@@ -32,5 +32,6 @@ class RightObserver
 {
 public:
 	RightObserver( class Car* subject );
+
 	void notify() const noexcept override;
 };

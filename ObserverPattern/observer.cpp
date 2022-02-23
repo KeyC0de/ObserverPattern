@@ -16,8 +16,10 @@ IObserver::~IObserver() noexcept
 }
 
 IObserver::IObserver( IObserver&& rhs ) noexcept
+	:
+	m_pSubject{std::move( rhs.m_pSubject )}
 {
-	std::swap( this->m_pSubject, rhs.m_pSubject );
+
 }
 
 IObserver& IObserver::operator=( IObserver&& rhs ) noexcept
@@ -36,7 +38,7 @@ LeftObserver::LeftObserver( class Car* subject )
 
 void LeftObserver::notify() const noexcept
 {
-	std::cout << "Car turned left\n";
+	std::cout << "Left Observer notified.\n";
 }
 
 RightObserver::RightObserver( class Car* subject )
@@ -48,5 +50,5 @@ RightObserver::RightObserver( class Car* subject )
 
 void RightObserver::notify() const noexcept
 {
-	std::cout << "Car turned right\n";
+	std::cout << "Right Observer notified.\n";
 }

@@ -2,7 +2,8 @@
 #include "observer.h"
 #include "subject.h"
 #if defined _DEBUG && !defined NDEBUG
-#	include <vld.h>
+#	pragma comment( lib, "C:/Program Files (x86)/Visual Leak Detector/lib/Win64/vld.lib" )
+#	include <C:/Program Files (x86)/Visual Leak Detector/include/vld.h>
 #endif
 
 #if defined _WIN32 || defined _MSC_VER
@@ -85,7 +86,6 @@ int main()
 	// change file stream translation mode
 #	pragma endregion
 #endif
-	std::ios_base::sync_with_stdio( false );
 	
 	/// program:...
 	Car car = Car{};
